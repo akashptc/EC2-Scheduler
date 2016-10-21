@@ -1,9 +1,11 @@
 import boto3
+import time
 
+ec2res = boto3.resource('ec2')
 ec2 = boto3.client('ec2')
 instance_ids = []
 filters = [{'Name':'tag:Autostop', 'Values':['Yes']}]
-i=0
+
 
 #Filter instances by tags
 print "Getting list of Autostop instances..."
@@ -19,4 +21,16 @@ for instance in instances_list['Reservations']:
 
 #Stop instances
 print "Stopping instances"
-ec2.stop_instances(InstanceIds=instance_ids)
+stop_response = ec2.stop_instances(InstanceIds=instance_ids)
+
+#Waiting for instances to stop
+for id in instance_ids:
+	instance = ec2res.Instance(id)
+	while(instance.state['Name']!="stopped"):
+		time.sleep(3)
+		instance.reload()
+		instance_status = instance.state['Name']
+		print instance.state['Name'], id
+
+
+print "All instances stopped"
