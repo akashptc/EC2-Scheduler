@@ -1,5 +1,5 @@
 # EC2-Scheduler
-Starts or stops EC2 instances on the specified schedule
+Starts or stops EC2 instances on a schedule
 
 Use tag key "Autostop" and value as "Yes" on instances desired to stopped on a schedule.
 ________________________________________________________________________________
