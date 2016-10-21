@@ -2,8 +2,9 @@
 Starts or stops EC2 instances on the specified schedule
 
 Use tag key "Autostop" and value as "Yes" on instances desired to stopped on a schedule.
-
+________________________________________________________________________________
 Pre-requisites:
+
 awscli
 
 Python 2.7 or 3.4
